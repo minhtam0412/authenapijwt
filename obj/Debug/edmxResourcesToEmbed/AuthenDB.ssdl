@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuthenDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ClientMaster">
+    <Key>
+      <PropertyRef Name="ClientKeyId" />
+    </Key>
+    <Property Name="ClientId" Type="varchar" MaxLength="50" />
+    <Property Name="ClientSecret" Type="varchar" MaxLength="50" />
+    <Property Name="ClientName" Type="varchar" MaxLength="50" />
+    <Property Name="RefreshTokenLifeTime" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="AllowedOrigin" Type="text" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="ClientKeyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefreshToken">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="500" />
+    <Property Name="ClientID" Type="varchar" MaxLength="500" />
+    <Property Name="IssuedTime" Type="datetime" />
+    <Property Name="ExpiredTime" Type="datetime" />
+    <Property Name="ProtectedTicket" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="UserPassword" Type="varchar" MaxLength="50" />
+    <Property Name="UserRole" Type="varchar" MaxLength="400" />
+    <Property Name="UserEmailId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="AuthenDBModelStoreContainer">
+    <EntitySet Name="ClientMaster" EntityType="Self.ClientMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RefreshToken" EntityType="Self.RefreshToken" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
